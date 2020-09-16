@@ -1,0 +1,14 @@
+recaptcha:
+    remote: https://developers.google.com/recaptcha
+    version: 1.0
+    license: MIT
+    js:
+        https://www.google.com/recaptcha/api.js?render=explicit&onload=onRecaptchaLoad: { external: true, attributes: { defer: true, async: true } }
+    dependencies:
+        - wmrecaptcha/recaptcha-render
+
+recaptcha-render:
+    js:
+        js/recaptcha-render.js: {}
+    dependencies:
+        - core/drupalSettings

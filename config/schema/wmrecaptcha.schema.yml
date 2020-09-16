@@ -1,0 +1,10 @@
+wmredirect.settings:
+    type: config_object
+    label: Settings
+    mapping:
+        site_key:
+            type: string
+            label: 'Site key'
+        secret_key:
+            type: string
+            label: 'Secret key'

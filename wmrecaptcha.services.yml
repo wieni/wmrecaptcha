@@ -1,0 +1,13 @@
+parameters:
+    wmrecaptcha.site_key: ''
+    wmrecaptcha.secret_key: ''
+
+services:
+    wmrecaptcha:
+        class: Drupal\wmrecaptcha\ReCaptcha
+        arguments:
+            - '@http_client'
+            - '%wmrecaptcha.site_key%'
+            - '%wmrecaptcha.secret_key%'
+        calls:
+            - [setConfigFactory, ['@config.factory']]
