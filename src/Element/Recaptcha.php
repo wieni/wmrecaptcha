@@ -57,7 +57,7 @@ class Recaptcha extends FormElement implements ContainerFactoryPluginInterface
     {
         $token = $this->getResponseToken();
 
-        if (!$this->reCaptcha->verify($token)) {
+        if (!$token || !$this->reCaptcha->verify($token)) {
             $formState->setErrorByName('recaptcha', $this->t("Please check the <i>I'm not a robot</i> box"));
         }
     }
