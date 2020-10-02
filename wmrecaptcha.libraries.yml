@@ -12,3 +12,4 @@ recaptcha-render:
         js/recaptcha-render.js: {}
     dependencies:
         - core/drupal
+        - core/drupalSettings
