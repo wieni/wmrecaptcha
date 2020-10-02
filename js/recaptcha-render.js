@@ -1,21 +1,27 @@
-var onRecaptchaLoad = function () {
-    if (typeof grecaptcha === "undefined") {
-        return;
-    }
+(function ($, Drupal, drupalSettings) {
 
-    var element = document.querySelector('.g-recaptcha');
+    'use strict';
 
-    if (element.classList.contains('is-rendered')) {
-        return;
-    }
+    var onRecaptchaLoad = function () {
+        if (typeof grecaptcha === "undefined") {
+            return;
+        }
 
-    grecaptcha.render(element, {
-        'sitekey' : window.drupalSettings.wmrecaptcha.siteKey,
-    });
+        var element = document.querySelector('.g-recaptcha');
 
-    element.classList.add('is-rendered');
-};
+        if (element.classList.contains('is-rendered')) {
+            return;
+        }
 
-Drupal.behaviors.reCaptchaRender = {
-    attach: onRecaptchaLoad,
-};
+        grecaptcha.render(element, {
+            'sitekey' : drupalSettings.wmrecaptcha.siteKey,
+        });
+
+        element.classList.add('is-rendered');
+    };
+
+    Drupal.behaviors.reCaptchaRender = {
+        attach: onRecaptchaLoad,
+    };
+
+}(jQuery, Drupal, drupalSettings));
