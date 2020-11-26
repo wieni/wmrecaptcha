@@ -1,2 +1,5 @@
 site_key: ''
 secret_key: ''
+trust_threshold:
+    global: 0.5
+    per_action: {  }

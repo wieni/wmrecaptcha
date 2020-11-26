@@ -1,6 +1,9 @@
 parameters:
-    wmrecaptcha.site_key: ''
-    wmrecaptcha.secret_key: ''
+    wmrecaptcha.v2.site_key: ''
+    wmrecaptcha.v2.secret_key: ''
+    wmrecaptcha.v3.site_key: ''
+    wmrecaptcha.v3.secret_key: ''
+    wmrecaptcha.trust_threshold: {  }
 
 services:
     wmrecaptcha:
@@ -9,5 +12,12 @@ services:
             - '@http_client'
             - '%wmrecaptcha.site_key%'
             - '%wmrecaptcha.secret_key%'
+            - '%wmrecaptcha.trust_threshold%'
+        calls:
+            - [setConfigFactory, ['@config.factory']]
+
+    wmrecaptcha.settings:
+        class: Drupal\wmrecaptcha\Settings
+        parent: container.trait
         calls:
             - [setConfigFactory, ['@config.factory']]
