@@ -5,7 +5,7 @@ namespace Drupal\wmrecaptcha\Element;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\Element\FormElement;
-use Drupal\wmrecaptcha\ReCaptcha as ReCaptchaService;
+use Drupal\wmrecaptcha\ReCaptchaInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -18,7 +18,7 @@ class Recaptcha extends FormElement implements ContainerFactoryPluginInterface
 {
     /** @var RequestStack */
     protected $requestStack;
-    /** @var ReCaptchaService */
+    /** @var ReCaptchaInterface */
     protected $reCaptcha;
 
     public static function create(
@@ -55,11 +55,15 @@ class Recaptcha extends FormElement implements ContainerFactoryPluginInterface
 
     public function validate(array $element, FormStateInterface $formState)
     {
-        $token = $this->getResponseToken();
+        if ($token = $this->getResponseToken()) {
+            $verification = $this->reCaptcha->verify($token);
 
-        if (!$token || !$this->reCaptcha->verify($token)) {
-            $formState->setErrorByName('recaptcha', $this->t("Please check the <i>I'm not a robot</i> box"));
+            if ($this->reCaptcha->isTrusted($verification)) {
+                return;
+            }
         }
+
+        $formState->setErrorByName('recaptcha', $this->t("Please check the <i>I'm not a robot</i> box"));
     }
 
     protected function getResponseToken(): ?string

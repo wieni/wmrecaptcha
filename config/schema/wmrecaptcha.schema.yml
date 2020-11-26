@@ -8,3 +8,14 @@ wmredirect.settings:
         secret_key:
             type: string
             label: 'Secret key'
+        trust_threshold:
+            type: mapping
+            mapping:
+                global:
+                    type: float
+                    label: 'Global trust threshold'
+                per_action:
+                    type: sequence
+                    label: 'Trust threshold per action'
+                    sequence:
+                        type: float
