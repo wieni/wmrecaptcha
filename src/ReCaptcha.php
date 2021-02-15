@@ -4,6 +4,7 @@ namespace Drupal\wmrecaptcha;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 
 class ReCaptcha
 {
@@ -65,12 +66,16 @@ class ReCaptcha
 
     public function verify(string $responseToken): bool
     {
-        $response = $this->client->post('https://www.google.com/recaptcha/api/siteverify', [
-            'form_params' => [
-                'secret' => $this->getSecretKey(),
-                'response' => $responseToken,
-            ],
-        ]);
+        try {
+            $response = $this->client->post('https://www.google.com/recaptcha/api/siteverify', [
+                'form_params' => [
+                    'secret' => $this->getSecretKey(),
+                    'response' => $responseToken,
+                ],
+            ]);
+        } catch (GuzzleException $e) {
+            return false;
+        }
 
         $body = $response->getBody()->getContents();
         $body = \GuzzleHttp\json_decode($body, true);
