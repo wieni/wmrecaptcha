@@ -68,6 +68,14 @@ class Recaptcha extends FormElement implements ContainerFactoryPluginInterface
             return null;
         }
 
-        return $request->request->get('g-recaptcha-response');
+        if (!$responseToken = $request->request->get('g-recaptcha-response')) {
+            return null;
+        }
+
+        if (!is_string($responseToken)) {
+            return null;
+        }
+
+        return $responseToken;
     }
 }
