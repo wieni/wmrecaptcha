@@ -12,6 +12,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * Defines the reCAPTCHA form element with default properties.
  *
+ * Options are:
+ * - #recaptcha_type (string)
+ *   (optional) The type of reCAPTCHA widget. You can choose between 'v2' and 'v2_invisible'
+ *
  * @FormElement("recaptcha")
  */
 class Recaptcha extends FormElement implements ContainerFactoryPluginInterface
@@ -37,11 +41,12 @@ class Recaptcha extends FormElement implements ContainerFactoryPluginInterface
     {
         return [
             '#type' => 'item',
-            '#markup' => sprintf('<div class="g-recaptcha" data-sitekey="%s"></div>', $this->reCaptcha->getSiteKey()),
+            '#markup' => '<div class="wmrecaptcha"></div',
             '#input' => true,
             '#process' => [[$this, 'process']],
             '#element_validate' => [[$this, 'validate']],
             '#default_value' => '',
+            '#recaptcha_type' => 'v2',
         ];
     }
 
@@ -49,6 +54,7 @@ class Recaptcha extends FormElement implements ContainerFactoryPluginInterface
     {
         $element['#attached']['library'][] = 'wmrecaptcha/recaptcha';
         $element['#attached']['drupalSettings']['wmrecaptcha']['siteKey'] = $this->reCaptcha->getSiteKey();
+        $element['#attached']['drupalSettings']['wmrecaptcha']['type'] = $element['#recaptcha_type'];
 
         return $element;
     }
