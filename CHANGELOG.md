@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Add support for the invisible reCAPTCHA v2
+- Add Drupal 10 support
 
 ## [1.0.5] - 2021-02-15
 ### Fixed
