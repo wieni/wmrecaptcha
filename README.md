@@ -16,6 +16,8 @@ installed using Composer:
  composer require wieni/wmrecaptcha
 ```
 
+For setup of **reCaptcha key** read [the Wieni Handbook](https://github.com/wieni/handbook/blob/6ede4f8fa761cbd666af68124432997e567ab0e8/engineering/drupal/modules/wmrecaptcha/index.html.md).
+
 ## Changelog
 All notable changes to this project will be documented in the
 [CHANGELOG](CHANGELOG.md) file.
