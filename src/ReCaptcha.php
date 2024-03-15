@@ -5,6 +5,7 @@ namespace Drupal\wmrecaptcha;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Utils;
 
 class ReCaptcha
 {
@@ -78,7 +79,7 @@ class ReCaptcha
         }
 
         $body = $response->getBody()->getContents();
-        $body = \GuzzleHttp\json_decode($body, true);
+        $body = Utils::jsonDecode($body, true);
 
         return $body['success'];
     }
