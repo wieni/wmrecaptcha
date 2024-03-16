@@ -10,8 +10,9 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0",
-        "drupal/core": "^8 || ^9 || ^10"
+        "php": ">=8.1",
+        "drupal/core": "^9 || ^10.1",
+        "guzzlehttp/guzzle": "^7"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.0",
