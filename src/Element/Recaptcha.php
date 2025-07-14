@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  *
  * @FormElement("recaptcha")
  */
-class Recaptcha extends FormElement implements ContainerFactoryPluginInterface
+class Recaptcha extends FormElementBase implements ContainerFactoryPluginInterface
 {
     /** @var RequestStack */
     protected $requestStack;
