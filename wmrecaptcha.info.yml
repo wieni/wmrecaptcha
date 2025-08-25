@@ -1,6 +1,6 @@
 name: wmrecaptcha
 type: module
 description: Provides an integration with Google's reCAPTCHA service.
-core_version_requirement: ^8 || ^9 || ^10
+core_version_requirement: ^10 || ^11
 package: Wieni
 dependencies: {  }
