@@ -41,7 +41,7 @@ class Recaptcha extends FormElementBase implements ContainerFactoryPluginInterfa
     {
         return [
             '#type' => 'item',
-            '#markup' => '<div class="wmrecaptcha"></div',
+            '#markup' => '<div class="wmrecaptcha"></div>',
             '#input' => true,
             '#process' => [[$this, 'process']],
             '#element_validate' => [[$this, 'validate']],
