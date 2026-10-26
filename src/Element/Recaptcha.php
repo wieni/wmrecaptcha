@@ -4,6 +4,7 @@ namespace Drupal\wmrecaptcha\Element;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Render\Attribute\FormElement;
 use Drupal\Core\Render\Element\FormElementBase;
 use Drupal\wmrecaptcha\ReCaptcha as ReCaptchaService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -18,6 +19,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  *
  * @FormElement("recaptcha")
  */
+#[FormElement('recaptcha')]
 class Recaptcha extends FormElementBase implements ContainerFactoryPluginInterface
 {
     /** @var RequestStack */
