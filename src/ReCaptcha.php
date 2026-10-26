@@ -5,7 +5,6 @@ namespace Drupal\wmrecaptcha;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Utils;
 
 class ReCaptcha
 {
@@ -79,7 +78,11 @@ class ReCaptcha
         }
 
         $body = $response->getBody()->getContents();
-        $body = Utils::jsonDecode($body, true);
+        // Guzzle's Utils::jsonDecode() is deprecated and is removed in
+        // guzzlehttp/guzzle:8.0. JSON_THROW_ON_ERROR keeps the existing
+        // behaviour of throwing on a malformed response body (Guzzle threw an
+        // InvalidArgumentException; this throws a JsonException).
+        $body = json_decode($body, true, 512, \JSON_THROW_ON_ERROR);
 
         return $body['success'];
     }
